@@ -1,4 +1,3 @@
-// backend/models/Lot.js
 const mongoose = require('mongoose');
 
 const lotSchema = new mongoose.Schema({
@@ -11,4 +10,3 @@ const lotSchema = new mongoose.Schema({
 const Lot = mongoose.model('Lot', lotSchema);
 
 module.exports = Lot;
-

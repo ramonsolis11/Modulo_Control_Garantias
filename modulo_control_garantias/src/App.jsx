@@ -1,23 +1,29 @@
-// App.js
-import React from 'react';
+import React, { useState } from 'react';
 import LotList from './components/LotList';
 import LotDetails from './components/LotDetails';
 
 const App = () => {
+  const [selectedLot, setSelectedLot] = useState(null);
+
+  const handleLotSelect = (lot) => {
+    setSelectedLot(lot);
+  };
+
+  // Ejemplo de datos simulados de lotes
   const mockLots = [
-    { id: 1, name: 'Lote 1' },
-    { id: 2, name: 'Lote 2' },
+    { id: 1, name: 'Lote 1', /* otros campos */ },
+    { id: 2, name: 'Lote 2', /* otros campos */ },
+    { id: 3, name: 'Lote 3', /* otros campos */ },
     // Agrega más lotes aquí
   ];
 
-  const selectedLot = mockLots[0]; // Seleccionamos el primer lote para los detalles
-
   return (
     <div>
-      <LotList lots={mockLots} />
-      <LotDetails lot={selectedLot} />
+      <LotList lots={mockLots} onSelectLot={handleLotSelect} />
+      {selectedLot && <LotDetails lot={selectedLot} />}
     </div>
   );
 };
 
 export default App;
+

@@ -1,15 +1,19 @@
 // backend/routes/lots.js
 const express = require('express');
 const router = express.Router();
-const lotController = require('../controllers/lotController');
+const Lot = require('../models/Lot');
 
 // Ruta para crear un nuevo lote
-router.post('/', [
-    body('fechaOtorgada').notEmpty().isDate(),
-    body('nombreCliente').notEmpty(),
-    body('centroCosto').notEmpty(),
-    // Agrega más validaciones para otros campos
-], lotController.createLot);
+router.post('/', async (req, res) => {
+    try {
+        const newLotData = req.body;
+        const newLot = await Lot.create(newLotData);
+        res.status(201).json(newLot);
+    } catch (error) {
+        res.status(500).json({ error: 'Error al crear el lote' });
+    }
+});
+
 
 // Ruta para obtener todos los lotes
 router.get('/', lotController.getAllLots);
